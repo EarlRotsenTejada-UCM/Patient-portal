@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prescriptions | Cebu Community Hospital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+
+  <header class="site-header">
+    <p class="hospital-name">Cebu Community Hospital</p>
+
+    <div class="tools" role="group" aria-label="Display options">
+      <div role="group" aria-label="Language">
+        <button type="button" class="tool-btn" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" class="tool-btn" data-lang="fil" aria-pressed="false" lang="fil">Filipino</button>
+        <button type="button" class="tool-btn" data-lang="ceb" aria-pressed="false" lang="ceb">Cebuano</button>
+      </div>
+      <div role="group" aria-label="Text size">
+        <button type="button" class="tool-btn" id="smaller" aria-label="Make text smaller">A−</button>
+        <button type="button" class="tool-btn" id="larger" aria-label="Make text larger">A+</button>
+      </div>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" data-i18n="navHome">Home</a></li>
+        <li data-auth="in" hidden><a href="appointment.html" data-i18n="navAppt">Appointments</a></li>
+        <li data-auth="in" hidden><a href="results.html" data-i18n="navResults">Lab results</a></li>
+        <li data-auth="in" hidden><a href="prescriptions.html">Prescriptions</a></li>
+        <li data-auth="out"><a href="login.html" data-i18n="navLogin">Log in</a></li>
+        <li data-auth="in" hidden><a href="login.html">My account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <h1>Your prescriptions</h1>
+
+    <section aria-labelledby="summary-title">
+      <h2 id="summary-title">Summary</h2>
+      <p>Prescribed on: <strong>November 5, 2026</strong></p>
+      <p>Prescribed by: <strong>Dr. Maria Santos</strong></p>
+      <p><strong>3 medicines</strong> were prescribed.</p>
+    </section>
+
+    <section aria-labelledby="meds-title">
+      <h2 id="meds-title">Your medicines</h2>
+
+      <ul class="result-list">
+
+        <li class="result normal">
+          <h3>Metformin 500 mg tablet</h3>
+          <p class="value">1 tablet</p>
+          <p><strong>How often:</strong> 2 times a day, with meals</p>
+          <p><strong>For how long:</strong> 30 days</p>
+          <p class="meaning"><strong>What it is for:</strong> Helps control the sugar in your blood.</p>
+        </li>
+
+        <li class="result normal">
+          <h3>Vitamin D3 1000 IU capsule</h3>
+          <p class="value">1 capsule</p>
+          <p><strong>How often:</strong> 1 time a day, in the morning</p>
+          <p><strong>For how long:</strong> 60 days</p>
+          <p class="meaning"><strong>What it is for:</strong> Helps keep your bones strong.</p>
+        </li>
+
+        <li class="result normal">
+          <h3>Paracetamol 500 mg tablet</h3>
+          <p class="value">1 tablet</p>
+          <p><strong>How often:</strong> Only when you have pain or fever. Wait at least 6 hours between tablets.</p>
+          <p><strong>For how long:</strong> As needed</p>
+          <p class="meaning"><strong>What it is for:</strong> Relieves pain and lowers fever.</p>
+        </li>
+
+      </ul>
+    </section>
+
+    <section aria-labelledby="help-title">
+      <h2 id="help-title">Important</h2>
+      <p>Take your medicines exactly as your doctor or pharmacist told you.</p>
+      <p>If you feel unwell after taking a medicine, or you are not sure how to take it, call us or ask your pharmacist.</p>
+      <p><a class="button" href="contact.html">Contact the hospital</a></p>
+      <p><button type="button" class="button submit" onclick="window.print()">Print my prescriptions</button></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Cebu Community Hospital, Cebu City, Philippines</p>
+    <p data-i18n="footer">This is a student project and not a real hospital website.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

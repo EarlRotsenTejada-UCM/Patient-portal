@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact us | Cebu Community Hospital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+
+  <header class="site-header">
+    <p class="hospital-name">Cebu Community Hospital</p>
+
+    <div class="tools" role="group" aria-label="Display options">
+      <div role="group" aria-label="Language">
+        <button type="button" class="tool-btn" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" class="tool-btn" data-lang="fil" aria-pressed="false" lang="fil">Filipino</button>
+        <button type="button" class="tool-btn" data-lang="ceb" aria-pressed="false" lang="ceb">Cebuano</button>
+      </div>
+      <div role="group" aria-label="Text size">
+        <button type="button" class="tool-btn" id="smaller" aria-label="Make text smaller">A−</button>
+        <button type="button" class="tool-btn" id="larger" aria-label="Make text larger">A+</button>
+      </div>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" data-i18n="navHome">Home</a></li>
+        <li data-auth="in" hidden><a href="appointment.html" data-i18n="navAppt">Appointments</a></li>
+        <li data-auth="in" hidden><a href="results.html" data-i18n="navResults">Lab results</a></li>
+        <li data-auth="in" hidden><a href="prescriptions.html">Prescriptions</a></li>
+        <li data-auth="out"><a href="login.html" data-i18n="navLogin">Log in</a></li>
+        <li data-auth="in" hidden><a href="login.html">My account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <h1>Contact the hospital</h1>
+
+    <section class="emergency" aria-labelledby="emergency-title">
+      <h2 id="emergency-title">Is this an emergency?</h2>
+      <p>Do not send a message. Call right away or go to the Emergency Room.</p>
+      <p class="phone"><a href="tel:+63320000000">(032) 000 0000</a></p>
+    </section>
+
+    <section aria-labelledby="info-title">
+      <h2 id="info-title">How to reach us</h2>
+      <ul class="services">
+        <li>
+          <h3>Phone</h3>
+          <p><a href="tel:+63320000000">(032) 000 0000</a></p>
+          <p>Open every day, 24 hours.</p>
+        </li>
+        <li>
+          <h3>Email</h3>
+          <p><a href="mailto:info@example.com">info@example.com</a></p>
+          <p>We reply within 2 working days.</p>
+        </li>
+        <li>
+          <h3>Address</h3>
+          <address>Cebu Community Hospital<br>Cebu City, Cebu<br>Philippines</address>
+        </li>
+        <li>
+          <h3>Visiting hours</h3>
+          <p>Every day, 10:00 AM to 8:00 PM.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="form-title">
+      <h2 id="form-title">Send us a message</h2>
+      <p>Fields marked <strong>(required)</strong> must be completed. There is no time limit.</p>
+
+      <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+        <h2>Please fix these problems</h2>
+        <ul id="error-list"></ul>
+      </div>
+
+      <div id="success" class="success" role="status" tabindex="-1" hidden>
+        <h2>Your message was sent</h2>
+        <p>The hospital will reply to you by phone. Thank you.</p>
+      </div>
+
+      <form id="contact-form" novalidate>
+
+        <div class="field">
+          <label for="name">Full name (required)</label>
+          <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
+          <p class="field-error" id="name-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="phone">Mobile number (required)</label>
+          <p class="hint" id="phone-hint">Example: 0917 123 4567</p>
+          <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" aria-describedby="phone-hint phone-error">
+          <p class="field-error" id="phone-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="topic">What is your message about? (required)</label>
+          <select id="topic" name="topic" aria-describedby="topic-error">
+            <option value="">Choose one</option>
+            <option>Appointment</option>
+            <option>Lab results</option>
+            <option>Prescriptions</option>
+            <option>Billing</option>
+            <option>Something else</option>
+          </select>
+          <p class="field-error" id="topic-error" hidden></p>
+        </div>
+
+        <div class="field">
+          <label for="message">Your message (required)</label>
+          <p class="hint" id="message-hint">Please do not write private medical details here.</p>
+          <textarea id="message" name="message" rows="5" aria-describedby="message-hint message-error"></textarea>
+          <p class="field-error" id="message-error" hidden></p>
+        </div>
+
+        <button type="submit" class="button submit">Send message</button>
+      </form>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Cebu Community Hospital, Cebu City, Philippines</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4.4.1/dist/email.min.js"></script>
+  <script>
+    // Paste your own values from emailjs.com between the quotes
+    const EMAIL_PUBLIC_KEY = "paste your Public Key here";
+    const EMAIL_SERVICE_ID = "paste your Service ID here";
+    const EMAIL_CONTACT_TEMPLATE = "paste your contact Template ID here";
+    if (typeof emailjs !== "undefined") emailjs.init({ publicKey: EMAIL_PUBLIC_KEY });
+
+    const form = document.getElementById("contact-form");
+    const summary = document.getElementById("error-summary");
+    const errorList = document.getElementById("error-list");
+    const success = document.getElementById("success");
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      success.hidden = true;
+
+      errorList.innerHTML = "";
+      form.querySelectorAll(".field-error").forEach(p => { p.hidden = true; p.textContent = ""; });
+      form.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
+
+      const v = id => form.elements[id].value.trim();
+      const errors = [];
+
+      if (!v("name")) errors.push(["name", "Enter your full name."]);
+      if (!/^[0-9 +\-]{7,15}$/.test(v("phone")))
+        errors.push(["phone", "Enter a mobile number with 7 to 15 digits, like 0917 123 4567."]);
+      if (!v("topic")) errors.push(["topic", "Choose what your message is about."]);
+      if (!v("message")) errors.push(["message", "Write your message."]);
+
+      if (errors.length) {
+        errors.forEach(([id, text]) => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = "#" + id;
+          a.textContent = text;
+          a.addEventListener("click", ev => { ev.preventDefault(); document.getElementById(id).focus(); });
+          li.appendChild(a);
+          errorList.appendChild(li);
+
+          const p = document.getElementById(id + "-error");
+          p.textContent = text;
+          p.hidden = false;
+          document.getElementById(id).setAttribute("aria-invalid", "true");
+        });
+        summary.hidden = false;
+        summary.focus();
+        return;
+      }
+
+      // Everything is correct: send the message by email
+      summary.hidden = true;
+      const button = form.querySelector("button[type=submit]");
+      button.disabled = true;
+      button.textContent = "Sending...";
+
+      function failed() {
+        errorList.innerHTML = "<li>We could not send your message. Please try again, or call us at (032) 000 0000.</li>";
+        summary.hidden = false;
+        summary.focus();
+      }
+
+      if (typeof emailjs === "undefined") {
+        failed();
+        button.disabled = false;
+        button.textContent = "Send message";
+        return;
+      }
+
+      emailjs.send(EMAIL_SERVICE_ID, EMAIL_CONTACT_TEMPLATE, {
+        from_name: v("name"),
+        phone: v("phone"),
+        topic: v("topic"),
+        message: v("message")
+      }).then(
+        () => {
+          form.reset();
+          form.hidden = true;
+          success.hidden = false;
+          success.focus();
+        },
+        failed
+      ).finally(() => {
+        button.disabled = false;
+        button.textContent = "Send message";
+      });
+    });
+  </script>
+</body>
+</html>

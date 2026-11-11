@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Log in or sign up | Cebu Community Hospital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+
+  <header class="site-header">
+    <p class="hospital-name">Cebu Community Hospital</p>
+
+    <div class="tools" role="group" aria-label="Display options">
+      <div role="group" aria-label="Language">
+        <button type="button" class="tool-btn" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" class="tool-btn" data-lang="fil" aria-pressed="false" lang="fil">Filipino</button>
+        <button type="button" class="tool-btn" data-lang="ceb" aria-pressed="false" lang="ceb">Cebuano</button>
+      </div>
+      <div role="group" aria-label="Text size">
+        <button type="button" class="tool-btn" id="smaller" aria-label="Make text smaller">A−</button>
+        <button type="button" class="tool-btn" id="larger" aria-label="Make text larger">A+</button>
+      </div>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" data-i18n="navHome">Home</a></li>
+        <li data-auth="in" hidden><a href="appointment.html" data-i18n="navAppt">Appointments</a></li>
+        <li data-auth="in" hidden><a href="results.html" data-i18n="navResults">Lab results</a></li>
+        <li data-auth="in" hidden><a href="prescriptions.html">Prescriptions</a></li>
+        <li data-auth="out"><a href="login.html" data-i18n="navLogin">Log in</a></li>
+        <li data-auth="in" hidden><a href="login.html">My account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <h1>Log in or sign up</h1>
+
+    <!-- Shown when the person is NOT logged in -->
+    <div id="auth-area">
+
+      <div class="tabs" role="tablist" aria-label="Log in or sign up">
+        <button type="button" class="tab" role="tab" id="tab-login"
+                aria-controls="panel-login" aria-selected="true" tabindex="0">Log in</button>
+        <button type="button" class="tab" role="tab" id="tab-signup"
+                aria-controls="panel-signup" aria-selected="false" tabindex="-1">Sign up</button>
+      </div>
+
+      <!-- ============ LOG IN ============ -->
+      <div class="tab-panel" role="tabpanel" id="panel-login" aria-labelledby="tab-login">
+        <h2>Log in to your account</h2>
+        <p>Enter your patient number and password.</p>
+
+        <div id="login-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+          <h3>Please fix these problems</h3>
+          <ul id="login-list"></ul>
+        </div>
+
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="li-id">Patient number (required)</label>
+            <p class="hint" id="li-id-hint">You can find it on your hospital card. Example: 2026-0001</p>
+            <input type="text" id="li-id" name="patientId" autocomplete="username"
+                   aria-describedby="li-id-hint li-id-error">
+            <p class="field-error" id="li-id-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="li-password">Password (required)</label>
+            <input type="password" id="li-password" name="password" autocomplete="current-password"
+                   aria-describedby="li-password-error">
+            <p class="field-error" id="li-password-error" hidden></p>
+
+            <label class="choice show-password">
+              <input type="checkbox" id="li-show">
+              Show my password
+            </label>
+          </div>
+
+          <button type="submit" class="button submit">Log in</button>
+        </form>
+
+        <h3>Need help?</h3>
+        <p>If you forgot your password or patient number, call the hospital and we will help you.</p>
+        <p class="phone"><a href="tel:+63320000000">(032) 000 0000</a></p>
+      </div>
+
+      <!-- ============ SIGN UP ============ -->
+      <div class="tab-panel" role="tabpanel" id="panel-signup" aria-labelledby="tab-signup" hidden>
+        <h2>Create your patient account</h2>
+        <p>Fields marked <strong>(required)</strong> must be completed. There is no time limit.</p>
+
+        <div id="signup-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+          <h3>Please fix these problems</h3>
+          <ul id="signup-list"></ul>
+        </div>
+
+        <div id="signup-success" class="success" role="status" tabindex="-1" hidden>
+          <h3>Demo: your form was checked</h3>
+          <p>In the real portal, the hospital would confirm who you are, and then your account would be ready.</p>
+          <p><button type="button" class="button submit" id="go-login">Go to log in</button></p>
+        </div>
+
+        <form id="signup-form" novalidate>
+          <div class="field">
+            <label for="su-name">Full name (required)</label>
+            <p class="hint" id="su-name-hint">Write it the way it appears on your hospital card or ID.</p>
+            <input type="text" id="su-name" name="name" autocomplete="name" aria-describedby="su-name-hint su-name-error">
+            <p class="field-error" id="su-name-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="su-birth">Date of birth (required)</label>
+            <input type="date" id="su-birth" name="birth" autocomplete="bday" aria-describedby="su-birth-error">
+            <p class="field-error" id="su-birth-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="su-phone">Mobile number (required)</label>
+            <p class="hint" id="su-phone-hint">Example: 0917 123 4567</p>
+            <input type="tel" id="su-phone" name="phone" autocomplete="tel" inputmode="tel" aria-describedby="su-phone-hint su-phone-error">
+            <p class="field-error" id="su-phone-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="su-email">Email address (optional)</label>
+            <input type="email" id="su-email" name="email" autocomplete="email" aria-describedby="su-email-error">
+            <p class="field-error" id="su-email-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="su-password">Create a password (required)</label>
+            <p class="hint" id="su-pw-hint">Use at least 8 characters, with at least 1 letter and 1 number.</p>
+            <input type="password" id="su-password" name="password" autocomplete="new-password" aria-describedby="su-pw-hint su-password-error">
+            <p class="field-error" id="su-password-error" hidden></p>
+          </div>
+
+          <div class="field">
+            <label for="su-confirm">Type your password again (required)</label>
+            <input type="password" id="su-confirm" name="confirm" autocomplete="new-password" aria-describedby="su-confirm-error">
+            <p class="field-error" id="su-confirm-error" hidden></p>
+
+            <label class="choice show-password">
+              <input type="checkbox" id="su-show">
+              Show my passwords
+            </label>
+          </div>
+
+          <div class="field">
+            <label class="choice">
+              <input type="checkbox" id="su-consent" name="consent" aria-describedby="su-consent-error">
+              I agree that the hospital may keep my details to manage my account (required)
+            </label>
+            <p class="field-error" id="su-consent-error" hidden></p>
+          </div>
+
+          <button type="submit" class="button submit">Create account</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- Shown AFTER a successful log in -->
+    <div id="welcome-area" class="success" role="status" tabindex="-1" hidden>
+      <h2 id="welcome-title">You are logged in</h2>
+      <p>What would you like to do?</p>
+      <ul class="welcome-links">
+        <li><a class="button" href="results.html">See my lab results</a></li>
+        <li><a class="button" href="appointment.html">Book an appointment</a></li>
+      </ul>
+      <p><button type="button" class="tool-btn" id="logout">Log out</button></p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Cebu Community Hospital, Cebu City, Philippines</p>
+  </footer>
+
+  <script src="script.js"></script>
+    <script>
+    const ACCOUNTS_KEY = "portalAccounts";
+
+    const authArea = document.getElementById("auth-area");
+    const welcomeArea = document.getElementById("welcome-area");
+
+    /* ---------- Saved accounts (kept in this browser) ---------- */
+    function loadAccounts() {
+      try { return JSON.parse(localStorage.getItem(ACCOUNTS_KEY)) || []; }
+      catch (e) { return []; }
+    }
+    function saveAccounts(list) {
+      try { localStorage.setItem(ACCOUNTS_KEY, JSON.stringify(list)); return true; }
+      catch (e) { return false; }
+    }
+
+    // Passwords are never saved as typed. Only a scrambled version (a hash) is kept.
+    function makeSalt() {
+      const bytes = new Uint8Array(16);
+      crypto.getRandomValues(bytes);
+      return Array.from(bytes).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+    async function hashPassword(password, salt) {
+      const data = new TextEncoder().encode(salt + password);
+      const buffer = await crypto.subtle.digest("SHA-256", data);
+      return Array.from(new Uint8Array(buffer)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+
+    function cleanPhone(p) { return p.replace(/[\s-]/g, ""); }
+
+    /* ---------- Tabs (arrow keys, Home and End work) ---------- */
+    const tabLogin = document.getElementById("tab-login");
+    const tabSignup = document.getElementById("tab-signup");
+    const tabs = [tabLogin, tabSignup];
+
+    function selectTab(tab, moveFocus) {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.setAttribute("aria-selected", String(on));
+        t.tabIndex = on ? 0 : -1;
+        document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      });
+      if (moveFocus) tab.focus();
+    }
+
+    tabs.forEach((t, i) => {
+      t.addEventListener("click", () => selectTab(t, false));
+      t.addEventListener("keydown", e => {
+        let next = null;
+        if (e.key === "ArrowRight") next = tabs[(i + 1) % tabs.length];
+        else if (e.key === "ArrowLeft") next = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (e.key === "Home") next = tabs[0];
+        else if (e.key === "End") next = tabs[tabs.length - 1];
+        if (next) { e.preventDefault(); selectTab(next, true); }
+      });
+    });
+
+    if (location.hash === "#signup") selectTab(tabSignup, false);
+
+    /* ---------- Shared error helpers ---------- */
+    function clearErrors(form, summary, list) {
+      list.innerHTML = "";
+      summary.hidden = true;
+      form.querySelectorAll(".field-error").forEach(p => { p.hidden = true; p.textContent = ""; });
+      form.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
+    }
+
+    function showErrors(summary, list, errors) {
+      errors.forEach(([id, message]) => {
+        const li = document.createElement("li");
+        const a = document.createElement("a");
+        a.href = "#" + id;
+        a.textContent = message;
+        a.addEventListener("click", ev => { ev.preventDefault(); document.getElementById(id).focus(); });
+        li.appendChild(a);
+        list.appendChild(li);
+
+        const p = document.getElementById(id + "-error");
+        p.textContent = message;
+        p.hidden = false;
+        document.getElementById(id).setAttribute("aria-invalid", "true");
+      });
+      summary.hidden = false;
+      summary.focus();
+    }
+
+    /* ---------- Log in ---------- */
+    const loginForm = document.getElementById("login-form");
+    const loginSummary = document.getElementById("login-summary");
+    const loginList = document.getElementById("login-list");
+
+    document.getElementById("li-show").addEventListener("change", function () {
+      document.getElementById("li-password").type = this.checked ? "text" : "password";
+    });
+
+    function currentAccount() {
+      try {
+        const id = sessionStorage.getItem("loggedInId");
+        return loadAccounts().find(a => a.id === id) || null;
+      } catch (e) { return null; }
+    }
+
+    function showWelcome(account, moveFocus) {
+      authArea.hidden = true;
+      welcomeArea.hidden = false;
+      document.getElementById("welcome-title").textContent = "Welcome, " + account.name;
+      if (moveFocus) welcomeArea.focus();
+    }
+
+    loginForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      clearErrors(loginForm, loginSummary, loginList);
+
+      const id = loginForm.elements["patientId"].value.trim();
+      const pw = loginForm.elements["password"].value;
+      const errors = [];
+
+      if (!id) errors.push(["li-id", "Enter your patient number."]);
+      if (!pw) errors.push(["li-password", "Enter your password."]);
+      if (errors.length) { showErrors(loginSummary, loginList, errors); return; }
+
+      const account = loadAccounts().find(a => a.id === id);
+      let ok = false;
+      if (account) ok = (await hashPassword(pw, account.salt)) === account.hash;
+
+      if (!ok) {
+        showErrors(loginSummary, loginList, [["li-id",
+          "The patient number or password is not correct. Check them and try again, or call us for help."]]);
+        return;
+      }
+
+      try { sessionStorage.setItem("loggedInId", account.id); } catch (err) {}
+      loginForm.reset();
+      showWelcome(account, true);
+            applyAuthState();
+    });
+
+    document.getElementById("logout").addEventListener("click", function () {
+      try { sessionStorage.removeItem("loggedInId");       applyAuthState(); } catch (e) {}
+      welcomeArea.hidden = true;
+      authArea.hidden = false;
+      selectTab(tabLogin, false);
+      document.getElementById("li-id").focus();
+    });
+
+    const already = currentAccount();
+    if (already) showWelcome(already, false);
+
+    /* ---------- Sign up ---------- */
+    const signupForm = document.getElementById("signup-form");
+    const signupSummary = document.getElementById("signup-summary");
+    const signupList = document.getElementById("signup-list");
+    const signupSuccess = document.getElementById("signup-success");
+
+    document.getElementById("su-birth").max = new Date().toISOString().split("T")[0];
+
+    document.getElementById("su-show").addEventListener("change", function () {
+      const type = this.checked ? "text" : "password";
+      document.getElementById("su-password").type = type;
+      document.getElementById("su-confirm").type = type;
+    });
+
+    signupForm.addEventListener("submit", async function (e) {
+      e.preventDefault();
+      clearErrors(signupForm, signupSummary, signupList);
+
+      const v = name => signupForm.elements[name].value.trim();
+      const pw = signupForm.elements["password"].value;
+      const accounts = loadAccounts();
+      const errors = [];
+
+      if (!v("name")) errors.push(["su-name", "Enter your full name."]);
+      if (!v("birth")) errors.push(["su-birth", "Choose your date of birth."]);
+      if (!/^[0-9 +\-]{7,15}$/.test(v("phone")))
+        errors.push(["su-phone", "Enter a mobile number with 7 to 15 digits, like 0917 123 4567."]);
+      else if (accounts.some(a => cleanPhone(a.phone) === cleanPhone(v("phone"))))
+        errors.push(["su-phone", "An account with this mobile number already exists. Use the Log in tab."]);
+      if (v("email") && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v("email")))
+        errors.push(["su-email", "Check your email address. It should look like name@example.com."]);
+      if (pw.length < 8 || !/[A-Za-z]/.test(pw) || !/[0-9]/.test(pw))
+        errors.push(["su-password", "Your password needs at least 8 characters, with 1 letter and 1 number."]);
+      if (signupForm.elements["confirm"].value !== pw)
+        errors.push(["su-confirm", "The two passwords are not the same. Type them again."]);
+      if (!signupForm.elements["consent"].checked)
+        errors.push(["su-consent", "Tick the box to agree before you create an account."]);
+
+      if (errors.length) { showErrors(signupSummary, signupList, errors); return; }
+
+      // Give the new patient their own number, like 2026-0001
+      const number = "2026-" + String(accounts.length + 1).padStart(4, "0");
+      const salt = makeSalt();
+      accounts.push({
+        id: number,
+        name: v("name"),
+        birth: v("birth"),
+        phone: v("phone"),
+        email: v("email"),
+        salt: salt,
+        hash: await hashPassword(pw, salt)
+      });
+
+      if (!saveAccounts(accounts)) {
+        showErrors(signupSummary, signupList, [["su-name",
+          "Your browser blocked saving. Turn off private mode and try again."]]);
+        return;
+      }
+
+      signupForm.reset();
+      signupForm.hidden = true;
+
+      signupSuccess.innerHTML =
+        "<h3>Your account is ready</h3>" +
+        "<p>Welcome, <strong id=\"new-name\"></strong>.</p>" +
+        "<p>Your patient number is:</p>" +
+        "<p class=\"phone\" id=\"new-id\"></p>" +
+        "<p>Write it down. You need it every time you log in.</p>" +
+        "<p><button type=\"button\" class=\"button submit\" id=\"go-login\">Go to log in</button></p>";
+      document.getElementById("new-name").textContent = accounts[accounts.length - 1].name;
+      document.getElementById("new-id").textContent = number;
+      signupSuccess.hidden = false;
+      signupSuccess.focus();
+
+      document.getElementById("go-login").addEventListener("click", function () {
+        signupSuccess.hidden = true;
+        signupForm.hidden = false;
+        selectTab(tabLogin, true);
+        document.getElementById("li-id").value = number;
+      });
+    });
+  </script>

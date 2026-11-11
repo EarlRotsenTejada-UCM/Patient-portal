@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Patient Portal | Cebu Community Hospital</title>
+  <meta name="description" content="Book appointments, see lab results and contact Cebu Community Hospital.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+
+  <header class="site-header">
+    <p class="hospital-name">Cebu Community Hospital</p>
+
+    <div class="tools" role="group" aria-label="Display options">
+      <div role="group" aria-label="Language">
+        <button type="button" class="tool-btn" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" class="tool-btn" data-lang="fil" aria-pressed="false" lang="fil">Filipino</button>
+        <button type="button" class="tool-btn" data-lang="ceb" aria-pressed="false" lang="ceb">Cebuano</button>
+      </div>
+      <div role="group" aria-label="Text size">
+        <button type="button" class="tool-btn" id="smaller" aria-label="Make text smaller">A−</button>
+        <button type="button" class="tool-btn" id="larger" aria-label="Make text larger">A+</button>
+      </div>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" data-i18n="navHome">Home</a></li>
+        <li data-auth="in" hidden><a href="appointment.html" data-i18n="navAppt">Appointments</a></li>
+        <li data-auth="in" hidden><a href="results.html" data-i18n="navResults">Lab results</a></li>
+        <li data-auth="in" hidden><a href="prescriptions.html">Prescriptions</a></li>
+        <li data-auth="out"><a href="login.html" data-i18n="navLogin">Log in</a></li>
+        <li data-auth="in" hidden><a href="login.html">My account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+        <section class="hero" aria-labelledby="page-title">
+      <h1 id="page-title" data-i18n="title">Your health records, in one place</h1>
+
+      <div data-auth="out">
+        <p class="lead">Log in or create an account to book appointments and see your lab results.</p>
+        <p><a class="button" href="login.html">Log in or sign up</a></p>
+      </div>
+
+      <div data-auth="in" hidden>
+        <p class="lead" data-i18n="lead">See your appointments and lab results, and book a visit with a doctor.</p>
+        <p><a class="button" href="appointment.html" data-i18n="cta">Book an appointment</a></p>
+      </div>
+    </section>
+
+    <section aria-labelledby="services-title" data-auth="in" hidden>
+      <h2 id="services-title" data-i18n="servicesTitle">What you can do here</h2>
+      <ul class="services">
+        <li>
+          <h3><a href="appointment.html" data-i18n="s1">View or book appointments</a></h3>
+          <p data-i18n="s1d">Choose a doctor, a date and a time.</p>
+        </li>
+        <li>
+          <h3><a href="results.html" data-i18n="s2">See lab results</a></h3>
+          <p data-i18n="s2d">Read your test results after the lab sends them.</p>
+        </li>
+        <li>
+          <h3><a href="prescriptions.html" data-i18n="s3">Check prescriptions</a></h3>
+          <p data-i18n="s3d">See which medicines your doctor ordered.</p>
+        </li>
+        <li>
+          <h3><a href="contact.html" data-i18n="s4">Contact the hospital</a></h3>
+          <p data-i18n="s4d">Send a question or find our phone number.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="emergency" aria-labelledby="emergency-title">
+      <h2 id="emergency-title" data-i18n="emTitle">Is this an emergency?</h2>
+      <p data-i18n="emText">Do not use this website. Call the emergency number or go to the Emergency Room right away.</p>
+      <p class="phone"><a href="tel:+63320000000">(032) 000 0000</a></p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Cebu Community Hospital, Cebu City, Philippines</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

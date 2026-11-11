@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lab results | Cebu Community Hospital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+
+  <header class="site-header">
+    <p class="hospital-name">Cebu Community Hospital</p>
+
+    <div class="tools" role="group" aria-label="Display options">
+      <div role="group" aria-label="Language">
+        <button type="button" class="tool-btn" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" class="tool-btn" data-lang="fil" aria-pressed="false" lang="fil">Filipino</button>
+        <button type="button" class="tool-btn" data-lang="ceb" aria-pressed="false" lang="ceb">Cebuano</button>
+      </div>
+      <div role="group" aria-label="Text size">
+        <button type="button" class="tool-btn" id="smaller" aria-label="Make text smaller">A−</button>
+        <button type="button" class="tool-btn" id="larger" aria-label="Make text larger">A+</button>
+      </div>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" data-i18n="navHome">Home</a></li>
+        <li data-auth="in" hidden><a href="appointment.html" data-i18n="navAppt">Appointments</a></li>
+        <li data-auth="in" hidden><a href="results.html" data-i18n="navResults">Lab results</a></li>
+        <li data-auth="in" hidden><a href="prescriptions.html">Prescriptions</a></li>
+        <li data-auth="out"><a href="login.html" data-i18n="navLogin">Log in</a></li>
+        <li data-auth="in" hidden><a href="login.html">My account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <h1>Your lab results</h1>
+
+    <section aria-labelledby="summary-title">
+      <h2 id="summary-title">Summary</h2>
+      <p>Test date: <strong>November 5, 2026</strong></p>
+      <p>Ordered by: <strong>Dr. Maria Santos</strong></p>
+      <p>
+        <strong>5 tests were done.</strong>
+        3 are in the normal range.
+        2 are outside the normal range.
+        Please talk to your doctor about these results.
+      </p>
+    </section>
+
+    <section aria-labelledby="table-title">
+      <h2 id="table-title">All results</h2>
+
+      <!-- This box scrolls sideways on small phones, and keyboard users can reach it -->
+      <div class="table-wrap" role="region" aria-labelledby="table-title" tabindex="0">
+        <table>
+          <caption>Blood test results from November 5, 2026</caption>
+          <thead>
+            <tr>
+              <th scope="col">Test</th>
+              <th scope="col">Your result</th>
+              <th scope="col">Normal range</th>
+              <th scope="col">Status</th>
+              <th scope="col">What this means</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Hemoglobin</th>
+              <td>14.2 g/dL</td>
+              <td>12.0 to 16.0 g/dL</td>
+              <td><span class="status normal">Normal</span></td>
+              <td>Shows how well your blood carries oxygen.</td>
+            </tr>
+            <tr>
+              <th scope="row">Fasting blood sugar</th>
+              <td>112 mg/dL</td>
+              <td>70 to 99 mg/dL</td>
+              <td><span class="status high">High</span></td>
+              <td>Sugar level in your blood after not eating. Ask your doctor what to do next.</td>
+            </tr>
+            <tr>
+              <th scope="row">Total cholesterol</th>
+              <td>185 mg/dL</td>
+              <td>Below 200 mg/dL</td>
+              <td><span class="status normal">Normal</span></td>
+              <td>Fat in your blood. This level is healthy.</td>
+            </tr>
+            <tr>
+              <th scope="row">White blood cells</th>
+              <td>6.5 ×10³/µL</td>
+              <td>4.5 to 11.0 ×10³/µL</td>
+              <td><span class="status normal">Normal</span></td>
+              <td>Cells that fight infection.</td>
+            </tr>
+            <tr>
+              <th scope="row">Vitamin D</th>
+              <td>18 ng/mL</td>
+              <td>30 to 100 ng/mL</td>
+              <td><span class="status low">Low</span></td>
+              <td>Helps keep bones strong. Ask your doctor if you need a supplement.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="help-title">
+      <h2 id="help-title">What should I do next?</h2>
+      <p>
+        These results do not give a diagnosis. Only your doctor can explain what they mean for you.
+      </p>
+      <p>
+        <a class="button" href="appointment.html">Book a visit with your doctor</a>
+      </p>
+      <p>
+        <button type="button" class="button submit" onclick="window.print()">Print my results</button>
+      </p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>Cebu Community Hospital, Cebu City, Philippines</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

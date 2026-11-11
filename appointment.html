@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Book an appointment | Cebu Community Hospital</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main" data-i18n="skip">Skip to main content</a>
+
+  <header class="site-header">
+    <p class="hospital-name">Cebu Community Hospital</p>
+
+    <div class="tools" role="group" aria-label="Display options">
+      <div role="group" aria-label="Language">
+        <button type="button" class="tool-btn" data-lang="en" aria-pressed="true">English</button>
+        <button type="button" class="tool-btn" data-lang="fil" aria-pressed="false" lang="fil">Filipino</button>
+        <button type="button" class="tool-btn" data-lang="ceb" aria-pressed="false" lang="ceb">Cebuano</button>
+      </div>
+      <div role="group" aria-label="Text size">
+        <button type="button" class="tool-btn" id="smaller" aria-label="Make text smaller">A−</button>
+        <button type="button" class="tool-btn" id="larger" aria-label="Make text larger">A+</button>
+      </div>
+    </div>
+
+    <nav aria-label="Main">
+      <ul class="nav-list">
+        <li><a href="index.html" data-i18n="navHome">Home</a></li>
+        <li data-auth="in" hidden><a href="appointment.html" data-i18n="navAppt">Appointments</a></li>
+        <li data-auth="in" hidden><a href="results.html" data-i18n="navResults">Lab results</a></li>
+        <li data-auth="in" hidden><a href="prescriptions.html">Prescriptions</a></li>
+        <li data-auth="out"><a href="login.html" data-i18n="navLogin">Log in</a></li>
+        <li data-auth="in" hidden><a href="login.html">My account</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <h1>Book an appointment</h1>
+    <p>Fill in the form below. Fields marked <strong>(required)</strong> must be completed.</p>
+
+    <div id="error-summary" class="error-summary" role="alert" tabindex="-1" hidden>
+      <h2>Please fix these problems</h2>
+      <ul id="error-list"></ul>
+    </div>
+
+    <div id="success" class="success" role="status" tabindex="-1" hidden>
+      <h2>Your request was sent</h2>
+      <p>We will call you within 1 working day to confirm your appointment.</p>
+    </div>
+
+    <form id="booking-form" novalidate>
+
+      <div class="field">
+        <label for="name">Full name (required)</label>
+        <input type="text" id="name" name="name" autocomplete="name" aria-describedby="name-error">
+        <p class="field-error" id="name-error" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="phone">Mobile number (required)</label>
+        <p class="hint" id="phone-hint">Example: 0917 123 4567</p>
+        <input type="tel" id="phone" name="phone" autocomplete="tel" inputmode="tel" aria-describedby="phone-hint phone-error">
+        <p class="field-error" id="phone-error" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="dept">Type of doctor (required)</label>
+        <select id="dept" name="dept" aria-describedby="dept-error">
+          <option value="">Choose one</option>
+          <option>General check-up</option>
+          <option>Pediatrics (children)</option>
+          <option>Obstetrics and gynecology</option>
+          <option>Cardiology (heart)</option>
+          <option>Dental</option>
+          <option>Eye doctor</option>
+        </select>
+        <p class="field-error" id="dept-error" hidden></p>
+      </div>
+
+      <div class="field">
+        <label for="date">Preferred date (required)</label>
+        <input type="date" id="date" name="date" aria-describedby="date-error">
+        <p class="field-error" id="date-error" hidden></p>
+      </div>
+
+      <fieldset class="field" aria-describedby="time-error">
+        <legend>Preferred time (required)</legend>
+        <label class="choice"><input type="radio" name="time" value="Morning"> Morning (8:00 AM to 12:00 PM)</label>
+        <label class="choice"><input type="radio" name="time" value="Afternoon"> Afternoon (1:00 PM to 5:00 PM)</label>
+        <p class="field-error" id="time-error" hidden></p>
+      </fieldset>
+
+      <div class="field">
+        <label for="reason">Reason for visit (optional)</label>
+        <textarea id="reason" name="reason" rows="4"></textarea>
+      </div>
+
+      <button type="submit" class="button submit">Send request</button>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+    <p>Cebu Community Hospital, Cebu City, Philippines</p>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    const form = document.getElementById("booking-form");
+    const summary = document.getElementById("error-summary");
+    const list = document.getElementById("error-list");
+    const success = document.getElementById("success");
+
+    // Do not allow dates in the past
+    const today = new Date().toISOString().split("T")[0];
+    document.getElementById("date").min = today;
+
+    function check() {
+      const errors = [];
+      const v = id => form.elements[id].value.trim();
+
+      if (!v("name")) errors.push(["name", "Enter your full name."]);
+      if (!/^[0-9 +\-]{7,15}$/.test(v("phone")))
+        errors.push(["phone", "Enter a mobile number with 7 to 15 digits, like 0917 123 4567."]);
+      if (!v("dept")) errors.push(["dept", "Choose a type of doctor."]);
+      if (!v("date")) errors.push(["date", "Choose a date."]);
+      else if (v("date") < today) errors.push(["date", "Choose today or a later date."]);
+      if (!form.elements["time"].value) errors.push(["time", "Choose morning or afternoon."]);
+      return errors;
+    }
+
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      success.hidden = true;
+
+      list.innerHTML = "";
+      form.querySelectorAll(".field-error").forEach(p => { p.hidden = true; p.textContent = ""; });
+      form.querySelectorAll("[aria-invalid]").forEach(el => el.removeAttribute("aria-invalid"));
+
+      const errors = check();
+
+      if (errors.length) {
+        errors.forEach(([id, message]) => {
+          const li = document.createElement("li");
+          const a = document.createElement("a");
+          a.href = "#" + id;
+          a.textContent = message;
+          a.addEventListener("click", ev => {
+            ev.preventDefault();
+            const target = document.getElementById(id) || form.querySelector('[name="' + id + '"]');
+            target.focus();
+          });
+          li.appendChild(a);
+          list.appendChild(li);
+
+          const p = document.getElementById(id + "-error");
+          p.textContent = message;
+          p.hidden = false;
+          const field = document.getElementById(id);
+          if (field) field.setAttribute("aria-invalid", "true");
+        });
+        summary.hidden = false;
+        summary.focus();
+      } else {
+        summary.hidden = true;
+        form.hidden = true;
+        success.hidden = false;
+        success.focus();
+        // Later: send the form data to a server here
+      }
+    });
+  </script>
+</body>
+</html>
